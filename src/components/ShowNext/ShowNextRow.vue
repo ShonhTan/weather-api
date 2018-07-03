@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h3 class="showNext-dayTitle">{{showDate}}</h3>
-    <div class="showNext-row row">
-      <ShowNextItem class="col-3 p-3 mb-2 bg-light text-dark border"
+  <div class="mb-4 pt-5 border-top border-secondary">
+    <h3 class="showNext-dayTitle mb-3">{{showDate}} <span class="badge badge-primary">{{plus}}</span></h3> 
+    <div class="showNext-row row mb-3">
+      <ShowNextItem
       v-for="(item, index2) in dayInfo" :key="index2"
       v-bind:info="item"
       />
@@ -15,7 +15,7 @@ import ShowNextItem from "@/components/ShowNext/ShowNextItem.vue";
 
 export default {
   name:"ShowNextRow",
-  props:["dayInfo"],
+  props:["dayInfo", "plus"],
   components: {ShowNextItem},
   computed:{
     showDate(){
@@ -28,10 +28,5 @@ export default {
 </script>
 
 <style lang="scss">
-.showNext-dayTitle {
-  // text-align: center;
-}
-.showNext-row {
-  margin-bottom: 30px;
- }
+
 </style>

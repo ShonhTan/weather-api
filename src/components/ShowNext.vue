@@ -1,11 +1,12 @@
 <template>
   <div class="showNext">
-    <h2 class="showNext-title display-4">Météo des 5 prochains jours</h2>
+    <h2 class="showNext-title display-4 mb-5">Météo des 5 prochains jours</h2>
     <div v-if="info!==[]" class="showNext-info">
 
-      <show-next-row class="container"
+      <show-next-row
       v-for="(dayinfo, index) in info" :key="index"
-      v-bind:day-info="dayinfo"
+      :day-info="dayinfo"
+      :plus="dayDetail[index]"
       />
     </div>
   </div>
@@ -24,6 +25,11 @@ export default {
   },
   data(){
     return {
+      dayDetail: [
+        "Aujourd'hui",
+        "Demain",
+        "Après-demain"
+      ]
     };
   }
 }
@@ -32,7 +38,6 @@ export default {
 <style lang="scss" scoped>
 
 .showNext-title {
-margin-bottom: 40px;
  
 }
 

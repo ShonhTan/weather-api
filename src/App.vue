@@ -2,18 +2,19 @@
 <div class="app bg-dark text-white">
   <div class="container">
 
-    <h1 class="app-title display-2">Weather App</h1>
+    <h1 class="app-title display-3 py-4">Weather App</h1>
+
     <AppInput v-on:change-city="citySelect"/>
 
     <div v-if="city!=='' && today.cod!=='404' && today.main && next!==[]" class="app-info ">
-      <show-today class="p-3 mb-5 bg-light text-dark border rounded" v-bind:info="today"/>
+      <show-today class="p-3 mb-4 bg-light text-dark border rounded" v-bind:info="today"/>
       <show-next class="p-3 bg-light text-dark border rounded" v-bind:info="next"/>
     </div>
 
-    <div v-else class="app-info p-3 mb-5 bg-light text-dark border rounded">
+    <div v-else class="app-info p-5 bg-light text-dark border rounded">
       <p class="display-4">Pas d'info</p>
-      <p v-if="city===''">Pas de nom de ville</p>
-      <p v-else-if="today.cod==='404'">Aucune ville n'a été trouvée</p>
+      <p v-if="city===''">(Entrez un nom de ville)</p>
+      <p v-else-if="today.cod==='404'">(Aucune ville n'a été trouvée)</p>
     </div>
   </div>
 </div>
@@ -33,12 +34,11 @@ export default {
       city: "",
       today:{},
       next:{}
-
     }
   },
   methods: {
     APICallToday(){
-      fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${this.APIKey}&units=metric`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${this.APIKey}&units=metric`)
       .then((response) => {
         return response.json();
       })
@@ -47,7 +47,7 @@ export default {
       });
     },
     ApiCallNext(){
-      fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=${this.APIKey}&units=metric`)
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=${this.APIKey}&units=metric`)
       .then((response) => {
         return response.json();
       })
@@ -56,16 +56,13 @@ export default {
       })
     },
     makeForecastTab(data){
-      
-      
       if (data.cod==200 && data.list) {
         this.next=[]
         var day = new Date(data.list[0].dt*1000).getDay()
         var dayTab=[]
-        console.log(new Date(data.list[0].dt*1000).toLocaleDateString());
 
         data.list.forEach(element => {
-          var elementDay= new Date (element.dt*1000).getDay()
+          var elementDay= new Date(element.dt*1000).getDay()
           if (day !== elementDay) {
             day = elementDay
             this.next.push(dayTab);
@@ -74,7 +71,6 @@ export default {
           dayTab.push(element)
         });
         this.next.push(dayTab);
-        
       }
     },
     citySelect(input){
@@ -82,9 +78,6 @@ export default {
       this.APICallToday()
       this.ApiCallNext()
     }
-  },
-  mounted(){
-    
   }
 }
 </script>

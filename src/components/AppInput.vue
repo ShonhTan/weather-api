@@ -1,14 +1,14 @@
 <template>
   <div class="appInput">
-    <div class="input-group mb-3">
+    <form v-on:submit.prevent="changeCity" class="input-group mb-4">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Ville</span>
+        <label class="input-group-text" for="inputGroupSelect01">Ville</label>
       </div>
-      <form v-on:submit.prevent="changeCity">
-
-        <input type="text" class="form-control" placeholder="exemple: Paris" aria-label="Ville" aria-describedby="basic-addon1" v-model="inputValue">
-      </form>
-    </div>
+      <input type="text" class="form-control" placeholder="Exemple: Paris" aria-label="Ville" aria-describedby="basic-addon2" v-model="inputValue">
+      <div class="input-group-append" v-if="inputValue!==''">
+        <input class="btn btn-outline-secondary text-white" type="submit" value="Valider">
+      </div>
+    </form>
   </div>
 
   
@@ -22,12 +22,9 @@ export default {
       inputValue:""
     }
   },
-  props: {
-    
-  },
   methods:{
     changeCity(){
-      if (this.inputValue!=="") {
+      if (this.inputValue!=="") { 
         this.$emit('change-city', this.inputValue)
       }
     }

@@ -1,9 +1,23 @@
 <template>
-  <div class="showNext-item">
+  <!-- <div class="showNext-item d-flex flex-column align-items-center col-3 p-3 bg-light text-dark border">
     <h5>À {{showTime}}</h5>
-    <img class="mx-auto" v-for="(inItem, index) in info.weather" :src="`http://openweathermap.org/img/w/${inItem.icon}.png`" :key="index">
-    <p>{{info.main.temp}}°C / {{fahrenheitTemp}}°F</p>
+    <img v-for="(inItem, index) in info.weather" :src="`http://openweathermap.org/img/w/${inItem.icon}.png`" :key="index">
+    <p class="temperature mb-0"><span class="font-weight-bold">{{info.main.temp}}</span>°C / <span class="font-weight-bold">{{fahrenheitTemp}}</span>°F</p>
+    
+  </div> -->
+<div class="col-12 col-md-6 col-lg-3 mb-4">
+  <div class="card text-center">
+    <div class="showNext-item-time card-header text-light bg-info">
+      de {{showTime}} à {{toHour}}
+    </div>
+    <div class="card-body">
+      <img class="showNext-item-weatherIcon" v-for="(inItem, index) in info.weather" :src="`http://openweathermap.org/img/w/${inItem.icon}.png`" :key="index">
+    </div>
+    <div class="card-footer text-muted">
+      <span class="font-weight-bold">{{info.main.temp}}</span>°C / <span class="font-weight-bold">{{fahrenheitTemp}}</span>°F
+    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -16,6 +30,18 @@ export default {
     },
     showTime() {
       var infoTime = new Date(this.info.dt*1000);
+      var hours=infoTime.getHours()
+      if (String(hours).length<2) {
+        hours=0+String(hours);
+      }
+      var minutes=infoTime.getMinutes()
+      if (String(minutes).length<2) {
+        minutes=0+String(minutes);
+      }
+      return `${hours}:${minutes}`;
+    },
+    toHour (){
+      var infoTime = new Date(this.info.dt*1000+10800000);
       var hours=infoTime.getHours()
       if (String(hours).length<2) {
         hours=0+String(hours)
@@ -32,9 +58,13 @@ export default {
 
 
 <style lang="scss" scoped>
-.showNext-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.showNext-item{
+  &-time {
+    font-size: 20px;
+  }
+  &-weatherIcon {
+    width: 75px;
+    height: 75px;
+  }
 }
 </style>
