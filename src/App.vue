@@ -1,29 +1,98 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+<div class="app bg-dark text-white">
+  <div class="container">
+
+    <h1 class="app-title display-2">Weather App</h1>
+    <AppInput v-on:change-city="citySelect"/>
+
+    <div v-if="city!=='' && today.cod!=='404' && today.main && next!==[]" class="app-info ">
+      <show-today class="p-3 mb-5 bg-light text-dark border rounded" v-bind:info="today"/>
+      <show-next class="p-3 bg-light text-dark border rounded" v-bind:info="next"/>
     </div>
-    <router-view/>
+
+    <div v-else class="app-info p-3 mb-5 bg-light text-dark border rounded">
+      <p class="display-4">Pas d'info</p>
+      <p v-if="city===''">Pas de nom de ville</p>
+      <p v-else-if="today.cod==='404'">Aucune ville n'a été trouvée</p>
+    </div>
   </div>
+</div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import AppInput from "@/components/AppInput.vue";
+import ShowToday from "@/components/ShowToday.vue";
+import ShowNext from "@/components/ShowNext.vue";
+
+
+export default {
+  components:{AppInput, ShowToday, ShowNext},
+  data(){
+    return {
+      APIKey: "3228c530c95dcdce99a92414fb6830b7",
+      city: "",
+      today:{},
+      next:{}
+
     }
+  },
+  methods: {
+    APICallToday(){
+      fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${this.APIKey}&units=metric`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.today = data
+      });
+    },
+    ApiCallNext(){
+      fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=${this.APIKey}&units=metric`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.makeForecastTab(data);
+      })
+    },
+    makeForecastTab(data){
+      
+      
+      if (data.cod==200 && data.list) {
+        this.next=[]
+        var day = new Date(data.list[0].dt*1000).getDay()
+        var dayTab=[]
+        console.log(new Date(data.list[0].dt*1000).toLocaleDateString());
+
+        data.list.forEach(element => {
+          var elementDay= new Date (element.dt*1000).getDay()
+          if (day !== elementDay) {
+            day = elementDay
+            this.next.push(dayTab);
+            dayTab=[];
+          }
+          dayTab.push(element)
+        });
+        this.next.push(dayTab);
+        
+      }
+    },
+    citySelect(input){
+      this.city=input
+      this.APICallToday()
+      this.ApiCallNext()
+    }
+  },
+  mounted(){
+    
   }
 }
+</script>
+
+<style lang="scss">
+@import './assets/css/bootstrap.min.css';
+.app {
+  min-height: 100vh;
+}
+
 </style>
