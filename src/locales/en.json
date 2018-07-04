@@ -1,0 +1,41 @@
+{
+  "app": {
+    "title":"Weather App",
+    "noinfo": "No information",
+    "nocityname": "(Enter a city name)",
+    "notfound": "(City not found)"
+  },
+  "appInput":{
+    "citylabel":"City",
+    "ok": "OK",
+    "languagelabel":"Language",
+    "placeholder": "Example: Paris"
+  },
+  "showToday":{
+    "title": "Current weather in {place}",
+    "temperature": "Temperature",
+    "tempmin":"Minimum:",
+    "tempaverage":"Average:",
+    "tempmax":"Maximum:",
+    "humidity": "Humidity",
+    "pressure": "Pressure",
+    "wind": "Wind",
+    "windspeed": "Speed:",
+    "winddirection": "Direction:",
+    "clouds": "Cloudiness",
+    "sunrise": "Sunrise time",
+    "sunset": "Sunset time"
+  },
+  "showNext": {
+    "title": "Weather for the next 5 days",
+    "daydetail": [
+      "Today",
+      "Tomorrow",
+      "After tomorrow"
+    ]
+  },
+  "showNextItem": {
+    "fromto": "from {start} to {end}"
+
+  }
+}

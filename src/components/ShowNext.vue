@@ -6,7 +6,7 @@
       <show-next-row
       v-for="(dayinfo, index) in info" :key="index"
       :day-info="dayinfo"
-      :plus="$t('lang.showNext.dayDetail')[index]"
+      :plus="$t('lang.showNext.daydetail')[index]"
       />
     </div>
   </div>
@@ -23,23 +23,11 @@ export default {
 
   components:{
     ShowNextRow
-  },
-  data(){
-    return {
-
-      display: {
-        
-      }
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
-.showNext-title {
- 
-}
 
 </style>
 

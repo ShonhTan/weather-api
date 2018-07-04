@@ -8,7 +8,7 @@
 <div class="col-12 col-md-6 col-lg-3 mb-4">
   <div class="card text-center">
     <div class="showNext-item-time card-header text-light bg-info">
-      {{$t('lang.showNextItem.from')}} {{showTime}} {{$t('lang.showNextItem.to')}} {{toHour}}
+      {{$t('lang.showNextItem.fromto', {start:showTime, end: toHour})}}
     </div>
     <div class="card-body">
       <img class="showNext-item-weatherIcon" v-for="(inItem, index) in info.weather" :src="`http://openweathermap.org/img/w/${inItem.icon}.png`" :key="index">
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 export default {
   name:"ShowNextItem",
   props: ["info", "languageSelected"],
@@ -40,7 +41,7 @@ export default {
       }
       return `${hours}:${minutes}`;
     },
-    toHour (){
+    toHour(){
       var infoTime = new Date(this.info.dt*1000+10800000);
       var hours=infoTime.getHours()
       if (String(hours).length<2) {
@@ -54,6 +55,7 @@ export default {
     }
   }
 }
+
 </script>
 
 
