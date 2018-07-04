@@ -8,7 +8,7 @@
 <div class="col-12 col-md-6 col-lg-3 mb-4">
   <div class="card text-center">
     <div class="showNext-item-time card-header text-light bg-info">
-      de {{showTime}} à {{toHour}}
+      {{$t('lang.showNextItem.from')}} {{showTime}} {{$t('lang.showNextItem.to')}} {{toHour}}
     </div>
     <div class="card-body">
       <img class="showNext-item-weatherIcon" v-for="(inItem, index) in info.weather" :src="`http://openweathermap.org/img/w/${inItem.icon}.png`" :key="index">
@@ -23,10 +23,10 @@
 <script>
 export default {
   name:"ShowNextItem",
-  props: ["info"],
+  props: ["info", "languageSelected"],
   computed: {
     fahrenheitTemp() {
-      return Math.round((this.info.main.temp*1.8-32)*100)/100;
+      return Math.round((this.info.main.temp*1.8+32)*100)/100;
     },
     showTime() {
       var infoTime = new Date(this.info.dt*1000);
