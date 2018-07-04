@@ -1,30 +1,39 @@
 <template>
 <div class="app bg-dark text-white">
   <div class="container">
-
-    <h1 class="app-title display-3 py-4">Weather App</h1>
-
-    <AppInput v-on:change-city="citySelect"/>
-
-    <div v-if="city!=='' && today.cod!=='404' && today.main && next!==[]" class="app-info ">
-      <show-today class="p-3 mb-4 bg-light text-dark border rounded" v-bind:info="today"/>
-      <show-next class="p-3 bg-light text-dark border rounded" v-bind:info="next"/>
+    <h1 class="app-title display-3 py-4">
+    {{$t('lang.app.title')}}</h1>
+    <AppInput
+    @change-city="citySelect"
+    />
+    <div 
+    v-if="city!=='' && today.cod!=='404' && today.main && next!==[]"
+    class="app-info ">
+      <show-today class="p-3 mb-4 bg-light text-dark border rounded"
+      :info="today"
+      :language-selected="this.$parent.$i18n.locale"
+      />
+      
+      <show-next class="p-3 bg-light text-dark border rounded"
+      :info="next"
+      />
     </div>
 
     <div v-else class="app-info p-5 bg-light text-dark border rounded">
-      <p class="display-4">Pas d'info</p>
-      <p v-if="city===''">(Entrez un nom de ville)</p>
-      <p v-else-if="today.cod==='404'">(Aucune ville n'a été trouvée)</p>
+      <p class="display-4">{{$t('lang.app.noinfo')}}</p>
+      <p v-if="city===''">{{$t('lang.app.nocityname')}}</p>
+      <p v-else-if="today.cod==='404'">{{$t('lang.app.notfound')}}</p>
     </div>
+
   </div>
 </div>
+
 </template>
 
 <script>
 import AppInput from "@/components/AppInput.vue";
 import ShowToday from "@/components/ShowToday.vue";
 import ShowNext from "@/components/ShowNext.vue";
-
 
 export default {
   components:{AppInput, ShowToday, ShowNext},
@@ -38,23 +47,21 @@ export default {
   },
   methods: {
     APICallToday(){
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${this.APIKey}&units=metric`)
+      this.$http.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${this.APIKey}&units=metric`)
       .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this.today = data
+        this.today = response.body
+      }, response => {
+        this.today = response.body
       });
     },
-    ApiCallNext(){
-      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=${this.APIKey}&units=metric`)
+
+    APICallNext(){
+      this.$http.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=${this.APIKey}&units=metric`)
       .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this.makeForecastTab(data);
-      })
+        this.makeForecastTab(response.body);
+      });
     },
+
     makeForecastTab(data){
       if (data.cod==200 && data.list) {
         this.next=[]
@@ -76,7 +83,8 @@ export default {
     citySelect(input){
       this.city=input
       this.APICallToday()
-      this.ApiCallNext()
+      this.APICallNext()
+      
     }
   }
 }

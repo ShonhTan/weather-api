@@ -4,7 +4,8 @@
     <div class="showNext-row row mb-3">
       <ShowNextItem
       v-for="(item, index2) in dayInfo" :key="index2"
-      v-bind:info="item"
+      :info="item"
+      :language-selected="languageSelected"
       />
     </div>
   </div>
@@ -15,12 +16,11 @@ import ShowNextItem from "@/components/ShowNext/ShowNextItem.vue";
 
 export default {
   name:"ShowNextRow",
-  props:["dayInfo", "plus"],
+  props:["dayInfo", "plus", "languageSelected"],
   components: {ShowNextItem},
   computed:{
     showDate(){
       var date = new Date(this.dayInfo[0].dt*1000)
-      
       return `${date.toLocaleDateString()}`;
     }
   }
