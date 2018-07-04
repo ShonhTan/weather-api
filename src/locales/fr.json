@@ -1,0 +1,40 @@
+{
+  "app": {
+    "title":"Appli Météo",
+    "noinfo": "Pas d'information",
+    "nocityname": "(Entrez un nom de ville)",
+    "notfound": "(Aucune ville n'a été trouvée)"
+  },
+  "appInput":{
+    "citylabel":"Ville",
+    "ok": "Valider",
+    "languagelabel":"Langue",
+    "placeholder": "Exemple: Paris"
+  },
+  "showToday":{
+    "title": "Météo actuelle à {place}",
+    "temperature": "Température",
+    "tempmin":"Minimale:",
+    "tempaverage":"Moyenne:",
+    "tempmax":"Maximale:",
+    "humidity": "Humidité",
+    "pressure": "Pression",
+    "wind": "Vent",
+    "windspeed": "Vitesse:",
+    "winddirection": "Direction:",
+    "clouds": "Couverture nuageuse",
+    "sunrise": "Levé de soleil",
+    "sunset": "Couché de soleil"
+  },
+  "showNext": {
+    "title": "Météo des 5 prochains jours",
+    "daydetail": [
+      "Aujourd'hui",
+      "Demain",
+      "Après-demain"
+    ]
+  },
+  "showNextItem": {
+    "fromto": "de {start} à {end}"
+  }
+}

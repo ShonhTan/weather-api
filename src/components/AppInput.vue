@@ -1,26 +1,25 @@
 <template>
   <div class="appInput row">
-    <form class="input-group mb-4 col-6"
+    <form class="input-group mb-4 col-12 col-sm-6"
     @submit.prevent="changeCity"
     >
       <div class="input-group-prepend">
         <label class="input-group-text" for="inputGroupSelect01">{{$t('lang.appInput.citylabel')}}</label>
       </div>
-      <input type="text" class="form-control" aria-label="Ville" aria-describedby="basic-addon2" v-model="inputCity"
-      :placeholder="$t('lang.appInput.placeholder')"
+      <input type="text" class="form-control" aria-label="Ville" aria-describedby="basic-addon2" v-model="inputCity" :placeholder="$t('lang.appInput.placeholder')"
       >
       <div class="input-group-append" v-if="inputCity!==''">
         <input class="btn btn-outline-secondary text-white" type="submit" :value="$t('lang.appInput.ok')">
       </div>
     </form>
 
-    <div class="input-group mb-4 col-6">
+    <div class="input-group mb-4 col-12 col-sm-6">
       <select class="custom-select" id="inputGroupSelect02" v-model="selectLanguage"
       @change="changeLanguage"
       >
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-        <option value="jp">日本語</option>
+        <option v-for="(language, index) in languages"
+        :key="index"
+        :value="language.value">{{language.name}}</option>
       </select>
       <div class="input-group-append">
         <label class="input-group-text" for="inputGroupSelect02">{{$t('lang.appInput.languagelabel')}}</label>
@@ -37,23 +36,40 @@ export default {
   data(){
     return {
       inputCity:"",
-      selectLanguage:"fr"
+      selectLanguage:"fr",
+      languages:[
+        {
+          name: "Français",
+          value: "fr"
+        },
+        {
+          name: "English",
+          value: "en"
+        },
+        {
+          name: "日本語",
+          value: "jp"
+        },
+        {
+          name: "中国",
+          value: "ch"
+        }
+      ]
     }
   },
   methods:{
     changeCity(){
-      if (this.inputCity!=="") { 
+      if (this.inputCity!=="") {
         this.$emit('change-city', this.inputCity)
       }
     },
     changeLanguage(){      
-      this.$parent.$parent.$i18n.locale=this.selectLanguage
+      this.$root.$i18n.locale=this.selectLanguage;
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
 </style>

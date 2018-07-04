@@ -29,7 +29,7 @@
         <div class="col m-2 p-4 bg-light text-dark border rounded">
           <h4 class="mb-4">{{$t('lang.showToday.wind')}}</h4>
           <p>{{$t('lang.showToday.windspeed')}}  {{info.wind.speed}} m/s</p>
-          <p>{{$t('lang.showToday.winddirection')}}  {{convertDirection(info.wind.deg, languageSelected)}}</p>
+          <p>{{$t('lang.showToday.winddirection')}}  {{convertDirection(info.wind.deg)}}</p>
         </div>
         <div class="col m-2 p-4 bg-light text-dark border rounded">
           <h4 class="mb-4">{{$t('lang.showToday.clouds')}}</h4>
@@ -59,7 +59,7 @@ import windDirection from "@/assets/js/windDirection.js";
 
 export default {
   name:"showToday",
-  props: ["info", "languageSelected"],
+  props: ["info"],
   methods:{
     hour (time){
       var infoTime = new Date(time*1000);
@@ -73,8 +73,8 @@ export default {
       }
       return `${hours}:${minutes}`
     },
-    convertDirection(num, lg){
-      return windDirection.degToCard(num, lg);
+    convertDirection(num){
+      return windDirection.degToCard(num, this.$root.$i18n.locale);
     }
   }
 }

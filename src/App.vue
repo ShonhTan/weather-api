@@ -11,7 +11,6 @@
     class="app-info ">
       <show-today class="p-3 mb-4 bg-light text-dark border rounded"
       :info="today"
-      :language-selected="this.$parent.$i18n.locale"
       />
       
       <show-next class="p-3 bg-light text-dark border rounded"
@@ -84,7 +83,6 @@ export default {
       this.city=input
       this.APICallToday()
       this.APICallNext()
-      
     }
   }
 }
