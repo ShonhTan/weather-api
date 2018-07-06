@@ -12,7 +12,7 @@
     "placeholder": "例: Paris"
   },
   "showToday":{
-    "title": "{place}の天気",
+    "title": "{location}の天気",
     "temperature": "温度",
     "tempmin":"最小:",
     "tempaverage":"平均:",
@@ -27,7 +27,7 @@
     "sunset": "夕焼け時"
   },
   "showNext": {
-    "title": "次の5日間の天気",
+    "title": "{location}の次の5日間の天気",
     "daydetail": [
       "今日",
       "明日",
@@ -36,6 +36,9 @@
   },
   "showNextItem": {
     "fromto": "{start} → {end}"
-
+  },
+  "navBar" : {
+    "today": "今日",
+    "next": "次の日"
   }
 }

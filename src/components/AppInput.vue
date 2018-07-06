@@ -6,7 +6,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="inputGroupSelect01">{{$t('lang.appInput.citylabel')}}</label>
       </div>
-      <input type="text" class="form-control" aria-label="Ville" aria-describedby="basic-addon2" v-model="inputCity" :placeholder="$t('lang.appInput.placeholder')"
+      <input type="text" class="form-control" id="inputGroupSelect01" aria-label="Ville" aria-describedby="basic-addon2" v-model="inputCity" :placeholder="$t('lang.appInput.placeholder')"
       >
       <div class="input-group-append" v-if="inputCity!==''">
         <input class="btn btn-outline-secondary text-white" type="submit" :value="$t('lang.appInput.ok')">
@@ -24,7 +24,7 @@
       <div class="input-group-append">
         <label class="input-group-text" for="inputGroupSelect02">{{$t('lang.appInput.languagelabel')}}</label>
       </div>
-    </div>
+    </div> 
   </div>
 
   
@@ -60,7 +60,7 @@ export default {
   methods:{
     changeCity(){
       if (this.inputCity!=="") {
-        this.$emit('change-city', this.inputCity)
+        this.$root.$data.city = this.inputCity;
       }
     },
     changeLanguage(){      
