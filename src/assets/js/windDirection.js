@@ -1,4 +1,4 @@
-var degToCard = function (deg, lg) {
+function degToCard(deg, lg) {
   if (lg === "fr") {
     if (deg > 11.25 && deg < 33.75) {
       return "Nord Nord-Est";
@@ -67,7 +67,7 @@ var degToCard = function (deg, lg) {
     } else {
       return "North";
     }
-  } else if (lg === "jp") {
+  } else if (lg === "jp" || lg==="ch") {
     if (deg > 11.25 && deg < 33.75) {
       return "北 北-東";
     } else if (deg > 33.75 && deg < 56.25) {

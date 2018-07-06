@@ -12,7 +12,7 @@
     "placeholder": "Exemple: Paris"
   },
   "showToday":{
-    "title": "Météo actuelle à {place}",
+    "title": "Météo actuelle à {location}",
     "temperature": "Température",
     "tempmin":"Minimale:",
     "tempaverage":"Moyenne:",
@@ -27,7 +27,7 @@
     "sunset": "Couché de soleil"
   },
   "showNext": {
-    "title": "Météo des 5 prochains jours",
+    "title": "Météo des 5 prochains jours à {location}",
     "daydetail": [
       "Aujourd'hui",
       "Demain",
@@ -36,5 +36,10 @@
   },
   "showNextItem": {
     "fromto": "de {start} à {end}"
+  },
+  "navBar" : {
+    "today": "Aujourd'hui",
+    "next": "Prochains jours"
   }
+
 }

@@ -12,7 +12,7 @@
     "placeholder": "Example: Paris"
   },
   "showToday":{
-    "title": "Current weather in {place}",
+    "title": "Current weather in {location}",
     "temperature": "Temperature",
     "tempmin":"Minimum:",
     "tempaverage":"Average:",
@@ -27,7 +27,7 @@
     "sunset": "Sunset time"
   },
   "showNext": {
-    "title": "Weather for the next 5 days",
+    "title": "Weather for the next 5 days in {location}",
     "daydetail": [
       "Today",
       "Tomorrow",
@@ -36,6 +36,9 @@
   },
   "showNextItem": {
     "fromto": "from {start} to {end}"
-
+  },
+  "navBar" : {
+    "today": "Today",
+    "next": "Next days"
   }
 }

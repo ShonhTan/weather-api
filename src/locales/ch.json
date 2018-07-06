@@ -12,7 +12,7 @@
     "placeholder": "榜样: Paris"
   },
   "showToday":{
-    "title": "{place}的当前天气",
+    "title": "{location}的当前天气",
     "temperature": "温度",
     "tempmin":"最低限度:",
     "tempaverage":"平均:",
@@ -27,7 +27,7 @@
     "sunset": "日落时间"
   },
   "showNext": {
-    "title": "接下来5天的天气",
+    "title": "{location}的未来5天天气",
     "daydetail": [
       "今日",
       "明天",
@@ -36,5 +36,9 @@
   },
   "showNextItem": {
     "fromto": "{start} → {end}"
+  },
+  "navBar" : {
+    "today": "今天",
+    "next": "接下来的几天"
   }
 }
