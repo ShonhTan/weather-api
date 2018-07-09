@@ -24,12 +24,10 @@
 
 <script>
 import AppInput from "@/components/AppInput.vue";
-import ShowToday from "@/components/ShowToday.vue";
-import ShowNext from "@/components/ShowNext.vue";
 import NavBar from "@/components/NavBar.vue";
 
 export default {
-  components:{AppInput, ShowToday, ShowNext, NavBar},
+  components:{AppInput, NavBar},
 }
 </script>
 
