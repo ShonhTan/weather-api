@@ -1,5 +1,6 @@
 <template>
   <div class="appInput row">
+    <!-- City choose form -->
     <form class="input-group mb-4 col-12 col-sm-6"
     @submit.prevent="changeCity"
     >
@@ -13,6 +14,7 @@
       </div>
     </form>
 
+    <!-- Language select -->
     <div class="input-group mb-4 col-12 col-sm-6">
       <select class="custom-select" id="inputGroupSelect02" v-model="selectLanguage"
       @change="changeLanguage"
@@ -58,18 +60,16 @@ export default {
     }
   },
   methods:{
+    // change city
     changeCity(){
       if (this.inputCity!=="") {
         this.$root.$data.city = this.inputCity;
       }
     },
+    // change language
     changeLanguage(){      
       this.$root.$i18n.locale=this.selectLanguage;
     }
   }
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>
