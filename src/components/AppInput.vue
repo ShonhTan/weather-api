@@ -32,7 +32,11 @@
   
 </template>
 
+
 <script>
+import store from "@/store.js"
+import i18n from '@/localisation.js';
+
 export default {
   name: 'AppInput',
   data(){
@@ -56,19 +60,20 @@ export default {
           name: "中国",
           value: "ch"
         }
-      ]
+      ],
+      store
     }
   },
   methods:{
     // change city
     changeCity(){
       if (this.inputCity!=="") {
-        this.$root.$data.city = this.inputCity;
+        store.city = this.inputCity;        
       }
     },
     // change language
     changeLanguage(){      
-      this.$root.$i18n.locale=this.selectLanguage;
+      i18n.locale=this.selectLanguage;      
     }
   }
 }
