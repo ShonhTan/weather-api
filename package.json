@@ -9,6 +9,7 @@
     "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
+    "moment": "^2.22.2",
     "vue": "^2.5.16",
     "vue-i18n": "^8.0.0",
     "vue-resource": "^1.5.1",
