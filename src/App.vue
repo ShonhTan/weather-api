@@ -13,7 +13,7 @@
     <!-- router -->
     <div class="app-info">
       <router-view
-      :city="$root.$data.city"
+      :city="store.city"
       ></router-view>
     </div>
 
@@ -25,9 +25,15 @@
 <script>
 import AppInput from "@/components/AppInput.vue";
 import NavBar from "@/components/NavBar.vue";
+import store from "@/store.js"
 
 export default {
   components:{AppInput, NavBar},
+  data(){
+    return{
+      store
+    }
+  }
 }
 </script>
 

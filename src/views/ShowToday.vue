@@ -62,7 +62,7 @@
   <!-- No information -->
   <div v-else class="app-info p-5 bg-light text-dark border rounded">
     <p class="display-4">{{$t('lang.app.noinfo')}}</p>
-    <p v-if="$root.$data.cod>=400">{{$t('lang.app.notfound')}}</p>
+    <p v-if="store.cod>=400">{{$t('lang.app.notfound')}}</p>
     <p v-else-if="city===''">{{$t('lang.app.nocityname')}}</p>
   </div>
   
@@ -70,6 +70,8 @@
 
 <script>
 import windDirection from "@/assets/js/windDirection.js";
+import store from "@/store.js"
+import i18n from '@/localisation.js';
 
 export default {
   name:"showToday",
@@ -79,20 +81,21 @@ export default {
   data(){
     return {
       info: {},
-      show:false
+      show:false,
+      store
     }
   },
   methods:{
     // Get weather data from API
     APICallToday(){
-      this.$http.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${this.$root.$data.APIKey}&units=metric`)
+      this.$http.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${store.APIKey}&units=metric`)
       .then((response) => {
-        this.$root.$data.today = response.body;
-        this.$root.$data.cod=response.body.cod;
+        store.today = response.body;
+        store.cod=response.body.cod;
         this.info = response.body;
         return true;
       }, (response) => {
-        this.$root.$data.cod = response.body.cod;
+        store.cod = response.body.cod;
         return false;
       }).then((result)=>{
         this.show=result;
@@ -113,25 +116,25 @@ export default {
     },
     // Return cardinal direction
     convertDirection(num){
-      return windDirection.degToCard(num, this.$root.$i18n.locale);
+      return windDirection.degToCard(num, i18n.locale);
     }
   },
   watch: {
-    // watch $root.$data.city changes
+    // watch store.city changes
     city() {
       this.APICallToday();
     }
   },
   mounted(){
     // If wrong city input
-    if (this.city==="" || (this.$root.$data && this.$root.$data.cod > 400)) {     
+    if (this.city==="" || (store && store.cod > 400)) {     
       return;
     }
     // If (no data and input) or (data not corresponding to actual city)
-    if((!this.$root.$data.today && this.city!=="") || (this.$root.$data.cod ==200 && this.$root.$data.today.name.toLowerCase() !== this.city.toLowerCase())) {
+    if((!store.today && this.city!=="") || (store.cod ==200 && store.today.name.toLowerCase() !== this.city.toLowerCase())) {
       this.APICallToday();
     } else {  // if no city change & data
-      this.info = this.$root.$data.today;
+      this.info = store.today;
       this.show = true;
     }
   }

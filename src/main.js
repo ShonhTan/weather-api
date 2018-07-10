@@ -7,10 +7,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VueResource);
 
-import store from "./store.js";
-
 new Vue({
   render: h => h(App),
-  i18n, router,
-  data: store
+  i18n, router
 }).$mount('#app');
