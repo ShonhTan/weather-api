@@ -11,12 +11,10 @@
 
 <script>
 export default {
-  
 }
 </script>
 
 <style lang="scss" scoped>
-
 .router-link-exact-active {
   font-weight: bold;
 }
